@@ -1,0 +1,61 @@
+
+<?php
+$escape = $this->plugin('escapeHtml');
+$hyperlink = $this->plugin('hyperlink');
+$itemsFound = count($items) > 0;
+?>
+<div id="item-results">
+    <h3>Select Item</h3>
+    <div class="search-nav">
+        <div id="sidebar-resource-search" class="resource-search" data-search-url="<?php echo $escape($this->url(null, [], [], true)); ?>">
+            <input type="text" name="search" id="resource-list-search" value="<?php echo $escape($search); ?>">
+            <button type="button" class="o-icon-search"><?php echo $this->translate('Search'); ?></button>
+            <div class="resource-search-filters">
+                <a href="#"
+                    class="<?php echo ($resourceClassId || $itemSetId) ? 'collapse' : 'expand'; ?>"
+                    aria-label="<?php echo ($resourceClassId || $itemSetId) ? $this->translate('Collapse') : $this->translate('Expand'); ?>"><?php echo $this->translate('Filter search'); ?>
+                </a>
+                <div class="collapsible">
+                <?php
+                echo $this->resourceClassSelect([
+                    'name' => 'resource_class_id',
+                    'options' => [
+                        'empty_option' => '',
+                    ],
+                    'attributes' => [
+                        'id' => 'filter-resource-class',
+                        'class' => 'chosen-select',
+                        'value' => $resourceClassId,
+                        'data-placeholder' => 'Filter by class', // @translate
+                    ],
+                ]);
+                ?>
+                </div>
+            </div>
+        </div>
+        <?php if ($itemsFound): ?>
+        <?php echo $this->pagination('common/sidebar-pagination.phtml'); ?>
+        <?php endif; ?>
+    </div>
+    <?php if ($itemsFound): ?>
+    <div class="resource-list" id="resource-tree-link">
+        <?php foreach ($items as $item):?>
+            <?php if ($item->resourceClass()): ?>
+            <button class="resource-tree-link option"
+                type="button"
+                data-type="<?php echo $item->resourceClass()->id(); ?>"
+                data-label="<?php echo $escape($item->displayTitle()); ?>"
+                data-id="<?php echo $escape($item->id()); ?>">
+                <?php echo $item->displayTitle(); ?> (<?php echo $item->resourceClass()->label(); ?>)
+            </button>
+            <?php endif;?>
+        <?php endforeach; ?>
+    </div>
+    <?php else: ?>
+    <span class="no-resources"><?php echo $this->translate(sprintf('No %s found.', $this->translate('items'))); ?></span>
+    <?php endif; ?>
+</div>
+
+<div class="confirm-panel">
+    <button type="button" class="select-resources-button">Add selected</button>
+</div>

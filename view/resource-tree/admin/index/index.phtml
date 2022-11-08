@@ -1,0 +1,22 @@
+<?php
+$this->headScript()->appendFile($this->assetUrl('vendor/jstree/jstree.min.js', 'Omeka'));
+$form->prepare();
+$this->headScript()->appendFile($this->assetUrl('js/resource-tree-admin.js', 'ResourceTree'));
+$this->headLink()->appendStylesheet($this->assetUrl('css/jstree.css', 'Omeka'));
+$this->headLink()->appendStylesheet($this->assetUrl('css/resource-tree-admin.css', 'ResourceTree'));
+$escapeHtml = $this->plugin('escapeHtml');
+?>
+<input type="hidden" id="select-item-url" data-url="<?php echo $this->url('admin/default', ['controller' => 'resource-tree', 'action' => 'sidebar-select'], false)?>">
+<?php echo $this->pageTitle($this->translate(' Setting'), 1, $this->translate('Resource Tree')); ?>
+
+<?php echo $this->form()->openTag($form); ?>
+<fieldset id='page-actions'>
+    <button type="submit"><?php echo $this->translate('Submit'); ?></button>
+</fieldset>
+<?php echo $this->formCollection($form, false); ?>
+<?php echo $this->form()->closeTag($form); ?>
+<div id="resource-tree"
+    data-link-form-url="<?php echo $escapeHtml($this->url('admin/resource-tree/resource-tree-link-form')); ?>"
+    data-jstree-data="<?php echo $escapeHtml(json_encode($linkTree)); ?>">
+</div>
+<?php echo $this->partial('common/resource-tree-select-sidebar'); ?>

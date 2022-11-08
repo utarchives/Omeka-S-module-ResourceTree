@@ -1,0 +1,28 @@
+<?php
+$this->headScript()->appendFile($this->assetUrl('vendor/jstree/jstree.min.js', 'Omeka'));
+$this->headScript()->appendFile($this->assetUrl('js/resource-tree.js', 'ResourceTree'));
+// $this->headLink()->appendStylesheet($this->assetUrl('css/jstree.css', 'Omeka'));
+$escapeHtml = $this->plugin('escapeHtml');
+$loadingImage = $this->assetUrl('css/throbber.gif', 'ResourceTree');
+$resourceTree = $this->resourceTree();
+?>
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jstree/3.3.3/themes/default/style.min.css" />
+<div class="row">
+<nav class="breadcrumb">
+  <a class="breadcrumb-item" href="#"><span><i class="fa fa-home"></i> HOME</span></a>
+  <span class="breadcrumb-item active">階層検索</span>
+</nav>
+</div>
+<div id="full-window">
+    <div id="item-set-tree"
+        data-item-url="<?php echo $resourceTree->getItemUrl(); ?>"
+        data-selected-id="<?php echo $itemIdentifier; ?>"
+        data-default-depth="<?php echo $defaultDepth ?>"
+        data-jstree-data="<?php echo $resourceTree->getLinkTree($site->slug(), $this->identity()); ?>"
+        data-folder-class="<?php echo $folderClass; ?>"
+        data-search-folder-class="<?php echo $searchFolderClass; ?>"
+        data-search-document-class="<?php echo $documentClass; ?>"
+        >
+        <img src="<?php echo $loadingImage; ?>">&nbsp;Loading...
+    </div>
+</div>

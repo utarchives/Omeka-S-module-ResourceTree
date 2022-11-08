@@ -1,0 +1,48 @@
+<?php
+// Prepare the property queries.
+// $properties = isset($data['property']) ? $data['property'] : [];
+// $properties = array_filter($properties, function ($value) {
+//     return isset($value['text']) ? '' !== trim($value['text']) : true;
+// });
+//     if (!$properties) {
+//         $properties[] = [];
+//     }
+
+//     if (isset($query['search'])) {
+//         unset($properties[0]['joiner']);
+//         array_unshift($properties, [
+//             'property' => '',
+//             'type' => 'in',
+//             'text' => $query['search']
+//         ]);
+//     }
+
+//     $queryOption = function($value, array $search, $key, $text) {
+//         $selected = null;
+//         if (isset($search[$key]) && $value === $search[$key]) {
+//             $selected = ' selected';
+//         }
+//         return sprintf('<option value="%s"%s>%s</option>', $value, $selected, $text);
+//     };
+//     $queryText = function(array $search, $index) {
+//         $text = isset($search['text']) ? $search['text'] : null;
+//         return sprintf('<input type="text" class="query-text" name="%s" value="%s">',
+//             $this->escapeHtml("property[$index][text]"),
+//             $this->escapeHtml($text));
+//     }
+    ?>
+
+<label>
+        <span id="by-value-label" class="label"><?php echo $this->translate('Select Property'); ?></span>
+            <?php echo $this->propertySelect([
+                'name' => '[property]',
+                'attributes' => [
+                    'class' => 'query-property',
+                    'data-name' => 'property',
+                    'value' => isset($data['property']) ? $data['property'] : null,
+                ],
+                'options' => [
+                    'empty_option' => '[Any Property]', // @translate
+                ]
+            ]); ?>
+</label>

@@ -1,0 +1,33 @@
+#metadata-browse-properties .field.delete {
+    background-color: #fcc;
+}
+
+#metadata-browse-properties .collapse + .collapsible {
+    margin-top: .5em;
+}
+
+#metadata-browse-properties .restore-property {
+    display: none;
+}
+
+a.metadata-browse-link {
+    font-size: 75%;
+    display: block !important;
+}
+
+#resource-tree-link .option {
+    width: 310px;
+}
+
+#item-results+.confirm-panel,#item-results .select-resource-checkbox-wrapper{
+	display:none
+}
+#item-results.active{
+	display:none
+}
+#item-results.active+.confirm-panel{
+	display:none
+}
+#item-results.active .select-resource-checkbox-wrapper{
+	display:none
+}
