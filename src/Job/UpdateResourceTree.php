@@ -56,12 +56,14 @@ class UpdateResourceTree extends AbstractJob
                         // リソースの公開状況を取得する
                         $resource = $this->api->read('resources', ['id' => $item['data']['id']]);
                         $resourceData = $resource->getContent();
+                        $this->logger->warn($item['data']['id']);
+                        $this->logger->warn($resourceData->isPublic());
                         // 公開状況を追加
                         $query = ['property_id' => $item['data']['property'],
                             'resource_id' => $item['data']['id'],
                             'type' => 'resource',
                             'value_resource_id' => $parentId,
-                            'is_public' => (integer)$resourceData->isPublic
+                            'is_public' => (integer)$resourceData->isPublic()
                         ];
                         $response =  $this->api->create('parent_items', $query);
                         $generation[$depth] = $parentId;

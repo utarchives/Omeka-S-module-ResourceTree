@@ -1,6 +1,6 @@
 <?php
 $this->headScript()->appendFile($this->assetUrl('vendor/jstree/jstree.min.js', 'Omeka'));
-$this->headScript()->appendFile($this->assetUrl('js/resource-tree.js', 'ResourceTree'));
+$this->headScript()->appendFile($this->assetUrl('js/resource-tree.js'. '?' . date('Ymdhsi'), 'ResourceTree'));
 $loadingImage = $this->assetUrl('css/throbber.gif', 'ResourceTree');
 // $view->headLink()->appendStylesheet($view->assetUrl('css/jstree.css', 'Omeka'));
 $escapeHtml = $this->plugin('escapeHtml');

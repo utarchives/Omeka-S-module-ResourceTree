@@ -22,6 +22,7 @@ $(document).ready( function() {
     var initialTreeData;
     loadJsTree();
     var moveToResource = function (itemUrl, resourceId) {
+        startSearch();
         var url = itemUrl;
         url += "/" + resourceId;
         window.location.href = url;
